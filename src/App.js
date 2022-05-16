@@ -5,14 +5,13 @@ import { Chart } from "./components/chart";
 function App() {
   return (
     <div className="App">
-      <h1> Prueba</h1>
+      <h1> Dolar Cost Average</h1>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-<div className="Chart-container"><Chart /></div>
-        
+        <p>Esto es DCA de 100 dolares al mes:</p>
+
+        <div className="Chart-container">
+          <Chart />
+        </div>
       </header>
     </div>
   );

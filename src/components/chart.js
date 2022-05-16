@@ -14,6 +14,7 @@ import {
 
 import { getData } from "../api/getData";
 import { useState } from "react";
+import { dcaCalculator } from "../dcafunctions/dcaCalculator";
 
 ChartJS.register(
   CategoryScale,
@@ -41,7 +42,7 @@ const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
 export function Chart() {
   const [openSerie, setOpenSerie] = useState();
-  const [dateSerie, setDateSerie] = useState();
+  //const [dateSerie, setDateSerie] = useState();
   const [chartData, setChartData] = useState();
 
   const data = {
@@ -52,35 +53,28 @@ export function Chart() {
         data: chartData,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
-        pointStyle: 'circle',
+        pointStyle: "circle",
         pointRadius: 0,
-        pointHoverRadius: 10
+        pointHoverRadius: 10,
       },
     ],
   };
 
   useState(async () => {
     const symbol = "BTC-USD";
-    const period1 = "2010-02-01";
+    const period1 = "200-02-01";
 
-    const period2 = "2021-02-01";
+    const period2 = "2021-08-04";
 
     const datos = await getData(symbol, period1, period2);
 
     const arrayDatos = [datos][0].data;
-    //console.log(arrayDatos)
-    setOpenSerie(arrayDatos.map((item) => item.open));
-    setDateSerie(arrayDatos.map((item) => item.date.split("T")[0]));
 
-    const chartData = arrayDatos.map((item) => ({
-      x: item.date.split("T")[0],
-      y: item.open,
-    }));
+    const y = arrayDatos.map((item) => item.open);
+    const x = arrayDatos.map((item) => item.date.split("T")[0]);
 
-    console.log(chartData);
-
-    setChartData(chartData);
-  });
+    setChartData(dcaCalculator(100, y, x));
+  }, []);
 
   return <Line options={options} data={data} />;
 }
