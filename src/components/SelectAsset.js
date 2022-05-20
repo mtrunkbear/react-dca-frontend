@@ -10,6 +10,7 @@ const assets = [
     { label: 'SOL', value: 'SOL-USD' },
     { label: 'TSLA', value: 'TSLA' },
     { label: 'META', value: 'FB' },
+    { label: 'DOT', value: 'DOT-USD' },
   ];
   
   const SelectAsset = (  {setAsset}  ) => {
