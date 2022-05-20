@@ -26,15 +26,33 @@ ChartJS.register(
   Legend
 );
 export const options = {
+  scales:{
+    x: {
+      ticks:{
+        color:'white',
+        font:{ size: 12} 
+      }
+    },
+    y: {
+      ticks:{
+        color:'white',
+        font:{ size: 12} 
+      }
+    }
+  },
   responsive: true,
   plugins: {
     legend: {
       position: "top",
+      labels:{
+        font:{ size:15}
+      }
     },
     title: {
       display: true,
-      text: "Chart.js Line Chart",
+      text: "Valor acumulado en Dolares",
     },
+    
   },
 };
 
@@ -48,8 +66,8 @@ export const Chart = (props) => {
     : "?";
 
   useEffect(() => {
-    const period1 = "200-02-01";
-    const period2 = "2021-08-04";
+    const period1 = props.period1;
+    const period2 = props.period2;
 
     const fechtData = async () => {
       const data = await getData(props.symbol, period1, period2);
@@ -65,7 +83,7 @@ export const Chart = (props) => {
     };
 
     fechtData();
-  }, [props.symbol, props.amount]);
+  }, [props.symbol, props.amount,props.period1,props.period2]);
 
   const data = {
     labels,

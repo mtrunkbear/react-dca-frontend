@@ -15,19 +15,39 @@ const assets = [
   
   const SelectAsset = (  {setAsset}  ) => {
 
+
+
+
+
+    const customStyles = {
+      menu: (provided, state) => ({
+        ...provided,
+        width: state.selectProps.width,
+        borderBottom: '1px dotted pink',
+        color: state.selectProps.menuColor,
+        padding: 20,
+      }),
+    
+      control: (_, { selectProps: { width }}) => ({
+        width: width
+      }),
+    
+      singleValue: (provided, state) => {
+        const opacity = state.isDisabled ? 0.5 : 1;
+        const transition = 'opacity 300ms';
+    
+        return { ...provided, opacity, transition };
+      }
+    }
+    
+
+
     return (
-      <div className="SelectAsset" style={{
-        color: 'hsl(0, 0%, 40%)',
-        display: 'inline-block',
-        fontSize: 12,
-        fontStyle: 'italic',
-        marginTop: '1em',
-      }}>
+     
         <Select
           options={assets}
           onChange={setAsset}
         />
-      </div>
     );
   };
   
