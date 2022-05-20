@@ -91,8 +91,8 @@ export const Chart = (props) => {
       {
         label: "Valor actual desde " + "$" + actualValue,
         data: chartData,
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "rgb(0, 255, 0)",
+        backgroundColor: "rgba(0, 99, 0, 0.5)",
         pointStyle: "circle",
         pointRadius: 0,
         pointHoverRadius: 10,
