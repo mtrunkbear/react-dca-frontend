@@ -17,7 +17,7 @@ function App() {
         <div className="title">
           <h1> Dolar Cost Average</h1>
         </div>
-        <div className="subtitle"><p>Esto es DCA de 100 dolares al mes:</p></div>
+        <div className="subtitle"><p>Esto es DCA de {value} dolares al mes:</p></div>
         
       </header>
       <div className="app-content">

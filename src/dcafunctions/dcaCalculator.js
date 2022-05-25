@@ -1,4 +1,3 @@
-import React from "react";
 
 export const dcaCalculator = (savings, prices, date) => {
   const quantity = prices.map((item) => savings / item);
