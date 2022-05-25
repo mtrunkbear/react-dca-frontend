@@ -1,4 +1,5 @@
 import React from "react";
+import {Params} from '../interfaces/apiParams'
 
 import { Line } from "react-chartjs-2";
 import {
@@ -58,9 +59,10 @@ export const options = {
 
 const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
-export const Chart = (props) => {
+export const Chart = (props: any) => {
+  
   //const [dateSerie, setDateSerie] = useState();
-  const [chartData, setChartData] = useState();
+  const [chartData, setChartData] = useState<any>();
   const actualValue = chartData
     ? chartData[chartData.length - 1].y.toLocaleString().split(".")[0]
     : "?";
@@ -68,14 +70,16 @@ export const Chart = (props) => {
   useEffect(() => {
     const period1 = props.period1;
     const period2 = props.period2;
+    const symbol = props.symbol;
 
     const fechtData = async () => {
-      const data = await getData(props.symbol, period1, period2);
+      
+      const data = await getData(symbol, period1, period2);
 
       const arrayDatos = [data][0].data;
 
-      const y = arrayDatos.map((item) => item.open);
-      const x = arrayDatos.map((item) => item.date.split("T")[0]);
+      const y = arrayDatos.map((item: any) => item.open);
+      const x = arrayDatos.map((item: any) => item.date.split("T")[0]);
       const dca = dcaCalculator(props.amount, y, x);
       setChartData(dca);
       console.log();
@@ -100,5 +104,5 @@ export const Chart = (props) => {
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return <Line options={options as any} data={data} />;
 };

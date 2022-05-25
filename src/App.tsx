@@ -26,14 +26,14 @@ function App() {
             <label>
               <span> Instrumento:</span>
               <div className="select">
-                <SelectAsset setAsset={(opt) => setAsset(opt.value)} />
+                <SelectAsset setAsset={(opt:any) => setAsset(opt.value)} />
               </div>
             </label>
           </div>
           <div className="form-row">
             <label>
               <span> Monto:</span>
-              <input value={value} onChange={(e) => setValue(e.target.value)} />
+              <input value={value} onChange={(e) => setValue(e.target.value as any)} />
             </label>
           </div>
 

@@ -1,14 +1,14 @@
 
-export const dcaCalculator = (savings, prices, date) => {
-  const quantity = prices.map((item) => savings / item);
+export const dcaCalculator = (savings:any, prices:any, date:any) => {
+  const quantity = prices.map((item:any) => savings / item);
   const cumulativeQuantity = quantity.map(
     (
-      (sum) => (value) =>
+      (sum) => (value:any) =>
         (sum += value)
     )(0)
   );
 
-  const dca = cumulativeQuantity.map(function (e, i) {
+  const dca = cumulativeQuantity.map(function (e:any, i:any) {
     return e * prices[i];
   });
 

@@ -1,4 +1,4 @@
-import React from "react";
+
 import Select from "react-select";
 
 const assets = [
@@ -11,7 +11,7 @@ const assets = [
   { label: "DOT", value: "DOT-USD" },
 ];
 
-const SelectAsset = ({ setAsset }) => {
+const SelectAsset = ({ setAsset } : any) => {
   return <Select options={assets} onChange={setAsset} />;
 };
 
