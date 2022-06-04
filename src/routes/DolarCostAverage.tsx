@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Form } from "../components/Form";
 import { DataContext } from "../contexts/dataContext";
 import { Chart } from "../components/Chart";
-export default function SharpRatio() {
+export default function DolarCostAverage() {
     
   const { contextData } = useContext(DataContext);
     return (
