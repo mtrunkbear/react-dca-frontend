@@ -4,11 +4,10 @@ import "./App.css";
 import { useContext } from "react";
 
 import { DataContext } from "./contexts/dataContext";
-import { Form } from "./components/Form";
 import { Link } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Ruta from "./routes/SharpRatio";
 import DolarCostAverage from "./routes/DolarCostAverage";
+import SharpRatio from "./routes/SharpRatio";
 
 function App() {
   const { contextData } = useContext(DataContext);
@@ -48,7 +47,7 @@ function App() {
             element={<DolarCostAverage/>}
           />
 
-          <Route path="/ruta" element={<Ruta />} />
+          <Route path="/SharpRatio" element={<SharpRatio />} />
         </Routes></div>
         
       </BrowserRouter>
