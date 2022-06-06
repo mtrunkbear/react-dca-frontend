@@ -13,6 +13,7 @@ import {
 import { getData } from "../api/getData";
 import { useState, useEffect } from "react";
 import { dcaCalculator } from "../dcafunctions/dcaCalculator";
+import { sharpCalculator } from "../dcafunctions/sharpCalculator";
 
 ChartJS.register(
   CategoryScale,
@@ -74,8 +75,10 @@ export const Chart = (props: any) => {
       const prices = arrayDatos.map((item: any) => item.open);
       const date = arrayDatos.map((item: any) => item.date.split("T")[0]);
       const dca = dcaCalculator(props.amount, prices, date);
-      setChartData(dca);
-      console.log(chartData);
+      const sharp = sharpCalculator(prices, date);
+      {props.type=='dca'?setChartData(dca): setChartData(sharp)}
+      //console.log(chartData);
+      console.log(props.type)
       
     };
 

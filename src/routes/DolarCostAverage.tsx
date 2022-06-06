@@ -16,6 +16,7 @@ export default function DolarCostAverage() {
               amount={contextData.value}
               period1={contextData.period1}
               period2={contextData.period2}
+              type={'dca'}
             />
           </div>
         </div>
