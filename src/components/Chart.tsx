@@ -24,77 +24,80 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-export const options = {
-  scales: {
-    x: {
-      ticks: {
-        color: "white",
-        font: { size: 12 },
-      },
-    },
-    y: {
-      ticks: {
-        color: "white",
-        font: { size: 12 },
-      },
-    },
-  },
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-      labels: {
-        font: { size: 15 },
-      },
-    },
-    title: {
-      display: true,
-      text: "Valor acumulado en Dolares del instrumento",
-    },
-  },
-};
-
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
 export const Chart = (props: any) => {
-  const [chartData, setChartData] = useState<any>();
-  const actualValue = chartData
-    ? chartData[chartData.length - 1].y.toLocaleString().split(".")[0]
-    : "?";
+  const options = {
+    scales: {
+      x: {
+        ticks: {
+          color: "white",
+          font: { size: 12 },
+        },
+      },
+      y: {
+        ticks: {
+          color: "white",
+          font: { size: 12 },
+        },
+      },
+    },
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        labels: {
+          font: { size: 15 },
+        },
+      },
+      title: {
+        display: true,
+        text:
+          props.type == "dca"
+            ? "Valor acumulado en Dolares del instrumento"
+            : "Ratio de Sharp Del Instrumento",
+      },
+    },
+  };
 
+  const [chartData, setChartData] = useState<any>([{ x: NaN, y: "?" }] as any);
+  const actualValue = chartData[chartData.length - 1].y
+    .toLocaleString()
+    .split(".")[0];
+
+  console.log(chartData);
   useEffect(() => {
     const period1 = props.period1;
     const period2 = props.period2;
     const symbol = props.symbol;
-    
 
     const fechtData = async () => {
-      const data = await getData(symbol, period1, period2);
+      const dataSerie = await getData(symbol, period1, period2);
 
-      const arrayDatos = [data][0].data;
+      const arrayDatos = [dataSerie][0].data;
       const prices = arrayDatos.map((item: any) => item.open);
       const date = arrayDatos.map((item: any) => item.date.split("T")[0]);
       const dca = dcaCalculator(props.amount, prices, date);
-      const sharp = sharpCalculator(prices, date);
-      {props.type=='dca'?setChartData(dca): setChartData(sharp)}
-      //console.log(chartData);
-      console.log(props.type)
-      
+      const sharp = sharpCalculator(prices, date, 12);
+      //console.log(arrayDatos)
+      {
+        props.type == "dca" ? setChartData(dca) : setChartData(sharp);
+      }
+      console.log(chartData);
     };
 
     fechtData();
-  }, [props.symbol, props.amount, props.period1, props.period2]);
-
+  }, [props.symbol, props.amount, props.period1, props.period2, props.type]);
+  const labels = chartData.x;
   const data = {
     labels,
     datasets: [
       {
-        label: props.symbol+"   " + "$" + actualValue,
+        label: props.symbol + " " + "$" + actualValue,
         data: chartData,
         borderColor: "rgb(0, 255, 0)",
         backgroundColor: "rgba(0, 99, 0, 0.5)",
         pointStyle: "circle",
-        pointRadius: 0,
+        pointRadius: 1.5,
         pointHoverRadius: 10,
       },
     ],

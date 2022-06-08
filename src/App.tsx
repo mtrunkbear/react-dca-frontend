@@ -1,6 +1,5 @@
 import "./App.css";
 
-
 import { useContext } from "react";
 
 import { DataContext } from "./contexts/dataContext";
@@ -17,8 +16,6 @@ function App() {
         <div className="title">
           <h1> Dolar Cost Average</h1>
         </div>
-       
-      
       </header>
     );
   };
@@ -28,13 +25,14 @@ function App() {
       <BrowserRouter>
         <Header />
         <nav className="navbar">
-          <ul><li>
-            <Link to="/">Dolar Cost Average</Link>
-          </li>
-          <li>
-            <Link to="/SharpRatio">Sharp Ratio</Link>
-          </li></ul>
-          
+          <ul>
+            <li>
+              <Link to="/">Dolar Cost Average</Link>
+            </li>
+            <li>
+              <Link to="/SharpRatio">Sharp Ratio</Link>
+            </li>
+          </ul>
         </nav>
         <div className="subtitle">
           <p>Con un ahorro de $ {contextData.value} dolares al mes:</p>
@@ -42,14 +40,11 @@ function App() {
 
         <div className="main">
           <Routes>
-          <Route
-            path="/"
-            element={<DolarCostAverage/>}
-          />
+            <Route path="/" element={<DolarCostAverage />} />
 
-          <Route path="/SharpRatio" element={<SharpRatio />} />
-        </Routes></div>
-        
+            <Route path="/SharpRatio" element={<SharpRatio />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );

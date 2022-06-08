@@ -1,13 +1,6 @@
-export const mean = (array: any) =>{
+export const mean = (array: any) => {
   const mean = array.reduce((a: number, b: number) => a + b) / array.length;
-  return mean}
-
-export const movilAverage = (value: any) => {
-  let averages = [];
-  for (let i = 0; i < value.length; i++) {
-    averages[i] = mean(value.slice(i, i + 12));
-  }
-  return averages.slice(0,averages.length-1);
+  return mean;
 };
 
 export const variance = (array: any) => {
@@ -15,14 +8,30 @@ export const variance = (array: any) => {
   for (let i = 0; i < array.length; i++) {
     variance[i] = Math.pow(array[i] - mean(array), 2);
   }
+
   return mean(variance);
 };
 
+export const stdev = (array: any) => {
+  return Math.pow(variance(array), 1 / 2);
+};
 
-export const movilVariance = (value: any) => {
-  let averages = [];
+export const movilStatistic = (value: any, periods: any, statistic: any) => {
+  let averageStatistic = [];
   for (let i = 0; i < value.length; i++) {
-    averages[i] = variance(value.slice(i, i +12));
+    averageStatistic[i] = statistic(value.slice(i, i + periods));
   }
-  return averages.slice(0,averages.length-1);
+  return averageStatistic.slice(0, averageStatistic.length - 1);
+};
+
+export const movilAverage = (value: any, periods: any) => {
+  return movilStatistic(value, periods, mean);
+};
+
+export const movilVariance = (value: any, periods: any) => {
+  return movilStatistic(value, periods, variance);
+};
+
+export const movilStdev = (value: any, periods: any) => {
+  return movilStatistic(value, periods, stdev);
 };

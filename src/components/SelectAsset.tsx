@@ -8,6 +8,7 @@ const assets = [
   { label: "TSLA", value: "TSLA" },
   { label: "META", value: "FB" },
   { label: "DOT", value: "DOT-USD" },
+  { label: "S&P 500", value: "^GSPC" },
 ];
 
 const SelectAsset = ({ setAsset }: any) => {
@@ -21,19 +22,16 @@ const colourStyles = {
     ...styles,
     backgroundColor: "white",
     color: "rgb(0, 30, 0)",
-    height:'30px',
-    width: '103%',
-    fontSize: '20px',
-    
-    
+    height: "30px",
+    width: "103%",
+    fontSize: "20px",
   }),
   option: (styles: any) => {
     return {
       ...styles,
       backgroundColor: "white",
       color: "rgb(0, 30, 0)",
-      fontSize: '20px',
-      
+      fontSize: "20px",
     };
   },
 };

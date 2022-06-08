@@ -5,6 +5,13 @@ import { Chart } from "../components/Chart";
 export default function DolarCostAverage() {
     
   const { contextData } = useContext(DataContext);
+
+
+
+
+
+
+  
     return (
         <div className="app-content">
         <Form />
