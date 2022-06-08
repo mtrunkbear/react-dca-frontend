@@ -20,7 +20,7 @@ export const DataContextProvider = (props: any) => {
   });
 
   const value = { contextData, setContextData };
-  console.log(todayDate)
+
 
   return (
     <DataContext.Provider value={value}>{props.children}</DataContext.Provider>

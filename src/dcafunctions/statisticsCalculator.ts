@@ -1,5 +1,6 @@
 export const mean = (array: any) => {
-  const mean = array.reduce((a: number, b: number) => a + b) / array.length;
+  const mean = array.reduce((a: number, b: number) => a + b,null) / array.length;
+  
   return mean;
 };
 
@@ -19,13 +20,16 @@ export const stdev = (array: any) => {
 export const movilStatistic = (value: any, periods: any, statistic: any) => {
   let averageStatistic = [];
   for (let i = 0; i < value.length; i++) {
-    averageStatistic[i] = statistic(value.slice(i, i + periods));
+    averageStatistic[i] = statistic(value.slice(i-periods+1, i));
   }
   return averageStatistic.slice(0, averageStatistic.length - 1);
 };
 
 export const movilAverage = (value: any, periods: any) => {
-  return movilStatistic(value, periods, mean);
+    const returns =  movilStatistic(value, periods, mean);
+    
+  return returns;
+  
 };
 
 export const movilVariance = (value: any, periods: any) => {
