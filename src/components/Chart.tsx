@@ -52,7 +52,7 @@ export const Chart = (props: any) => {
       title: {
         display: true,
         text:
-          props.type == "dca"
+          props.type === "dca"
             ? "Valor acumulado en Dolares del instrumento"
             : "Ratio de Sharp Del Instrumento",
       },
@@ -60,9 +60,10 @@ export const Chart = (props: any) => {
   };
 
   const [chartData, setChartData] = useState<any>([{ x: NaN, y: "?" }] as any);
-  const actualValue = props.type=='dca'?  "$" + chartData[chartData.length - 1].y
-    .toLocaleString()
-    .split(".")[0] :chartData[chartData.length - 1].y.toString().slice(0,5)
+  const actualValue =
+    props.type === "dca"
+      ? "$" + chartData[chartData.length - 1].y.toLocaleString().split(".")[0]
+      : chartData[chartData.length - 1].y.toString().slice(0, 5);
   useEffect(() => {
     const period1 = props.period1;
     const period2 = props.period2;
@@ -72,15 +73,14 @@ export const Chart = (props: any) => {
       const dataSerie = await getData(symbol, period1, period2);
 
       const arrayDatos = [dataSerie][0].data;
-      
+
       const prices = arrayDatos.map((item: any) => item.close);
       const date = arrayDatos.map((item: any) => item.date.split("T")[0]);
       const dca = dcaCalculator(props.amount, prices, date);
       const sharp = sharpCalculator(prices, date, 12);
+
       
-      {
-        props.type == "dca" ? setChartData(dca) : setChartData(sharp);
-      }
+        props.type === "dca" ? setChartData(dca) : setChartData(sharp);
       
     };
 
@@ -91,7 +91,7 @@ export const Chart = (props: any) => {
     labels,
     datasets: [
       {
-        label: props.symbol + " " +  actualValue.toString(),
+        label: props.symbol + " " + actualValue.toString(),
         data: chartData,
         borderColor: "rgb(0, 255, 0)",
         backgroundColor: "rgba(0, 99, 0, 0.5)",

@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { Chart } from "../components/Chart";
 import { Form } from "../components/Form";
 import { DataContext } from "../contexts/dataContext";
-import { sharpCalculator } from "../dcafunctions/sharpCalculator";
 
 export default function SharpRatio() {
   
