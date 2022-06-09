@@ -60,10 +60,9 @@ export const Chart = (props: any) => {
   };
 
   const [chartData, setChartData] = useState<any>([{ x: NaN, y: "?" }] as any);
-  const actualValue = props.type=='dca'? chartData[chartData.length - 1].y
+  const actualValue = props.type=='dca'?  "$" + chartData[chartData.length - 1].y
     .toLocaleString()
-    .split(".")[0] : chartData[chartData.length - 1].y
-
+    .split(".")[0] :chartData[chartData.length - 1].y.toString().slice(0,5)
   useEffect(() => {
     const period1 = props.period1;
     const period2 = props.period2;
@@ -92,7 +91,7 @@ export const Chart = (props: any) => {
     labels,
     datasets: [
       {
-        label: props.symbol + " " + "$" + actualValue.toString(),
+        label: props.symbol + " " +  actualValue.toString(),
         data: chartData,
         borderColor: "rgb(0, 255, 0)",
         backgroundColor: "rgba(0, 99, 0, 0.5)",

@@ -17,7 +17,7 @@ export const sharpCalculator = (prices: any, date: any, periods: any) => {
     periods
   );
 
-F
+
   let data = [];
   for (let i = 0; i < returns.length; i++) {
     data[i] = { x: date[i], y: averageReturns[i-2] / averageStdev[i-2] };
