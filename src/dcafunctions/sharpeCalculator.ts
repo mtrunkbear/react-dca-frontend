@@ -1,6 +1,6 @@
 import * as Statistics from "./statisticsCalculator";
 
-export const sharpCalculator = (prices: any, date: any, periods: any) => {
+export const sharpeCalculator = (prices: any, date: any, periods: any) => {
   let returns = [];
 
   for (let i = 0; i < prices.length; i++) {

@@ -4,12 +4,14 @@ export const DataContext = createContext({} as any);
 
 var today = new Date();
 
-const todayYear =  today.getFullYear()
-const todayMonth = today.getMonth()+1 >=10 ? today.getMonth()+1 : '0'+ (today.getMonth()+1) 
-const todayDay = today.getDate()>=10?today.getDate(): '0'+(today.getDate())
- const todayDate = todayYear +'-'+ todayMonth +'-'+todayDay
-
-
+const todayYear = today.getFullYear();
+const todayMonth =
+  today.getMonth() + 1 >= 10
+    ? today.getMonth() + 1
+    : "0" + (today.getMonth() + 1);
+const todayDay =
+  today.getDate() >= 10 ? today.getDate() : "0" + today.getDate();
+const todayDate = todayYear + "-" + todayMonth + "-" + todayDay;
 
 export const DataContextProvider = (props: any) => {
   const [contextData, setContextData] = useState({
@@ -20,7 +22,6 @@ export const DataContextProvider = (props: any) => {
   });
 
   const value = { contextData, setContextData };
-
 
   return (
     <DataContext.Provider value={value}>{props.children}</DataContext.Provider>

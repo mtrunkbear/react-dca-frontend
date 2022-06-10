@@ -6,7 +6,7 @@ import { DataContext } from "./contexts/dataContext";
 import { Link } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DolarCostAverage from "./routes/DolarCostAverage";
-import SharpRatio from "./routes/SharpRatio";
+import SharpeRatio from "./routes/SharpeRatio";
 
 function App() {
   const { contextData } = useContext(DataContext);
@@ -30,19 +30,17 @@ function App() {
               <Link to="/">Dolar Cost Average</Link>
             </li>
             <li>
-              <Link to="/SharpRatio">Sharp Ratio</Link>
+              <Link to="/SharpeRatio">Sharp Ratio</Link>
             </li>
           </ul>
         </nav>
-        <div className="subtitle">
-          <p>Con un ahorro de $ {contextData.value} dolares al mes:</p>
-        </div>
+     
 
         <div className="main">
           <Routes>
             <Route path="/" element={<DolarCostAverage />} />
 
-            <Route path="/SharpRatio" element={<SharpRatio />} />
+            <Route path="/SharpeRatio" element={<SharpeRatio />} />
           </Routes>
         </div>
       </BrowserRouter>

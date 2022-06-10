@@ -1,5 +1,4 @@
 import Select from "react-select";
-
 const assets = [
   { label: "BTC", value: "BTC-USD" },
   { label: "ETH", value: "ETH-USD" },
@@ -9,6 +8,7 @@ const assets = [
   { label: "META", value: "FB" },
   { label: "DOT", value: "DOT-USD" },
   { label: "S&P 500", value: "^GSPC" },
+  { label: "APPLE", value: "AAPL" },
 ];
 
 const SelectAsset = ({ setAsset }: any) => {

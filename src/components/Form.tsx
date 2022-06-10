@@ -2,12 +2,11 @@ import { useContext } from "react";
 import SelectAsset from "./SelectAsset";
 import { DataContext } from "../contexts/dataContext";
 
-export const Form = () => {
+export const Form = (props: any) => {
   const { contextData, setContextData } = useContext(DataContext);
 
-
   return (
-    <form className="options">
+    <form className="form">
       <div className="form-row">
         <label>
           <span> Instrumento:</span>
@@ -20,17 +19,19 @@ export const Form = () => {
           </div>
         </label>
       </div>
-      <div className="form-row">
-        <label>
-          <span> Monto:</span>
-          <input
-            value={contextData.value}
-            onChange={(e) =>
-              setContextData({ ...contextData, value: e.target.value as any })
-            }
-          />
-        </label>
-      </div>
+      {props.type === "dca" ? (
+        <div className="form-row">
+          <label>
+            <span> Monto:</span>
+            <input
+              value={contextData.value}
+              onChange={(e) =>
+                setContextData({ ...contextData, value: e.target.value as any })
+              }
+            />
+          </label>
+        </div>
+      ) : null}
 
       <div className="form-row">
         <label>

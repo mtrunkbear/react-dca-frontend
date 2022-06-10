@@ -6,18 +6,18 @@ export default function DolarCostAverage() {
     
   const { contextData } = useContext(DataContext);
 
-
-
-
-
-
-  
     return (
         <div className="app-content">
-        <Form />
+           <div className="subtitle">
+      <p>Con un ahorro de $ {contextData.value} dolares al mes:</p>
+    </div>
+       
 
         <div className="panel">
+        <Form type={'dca'} />
+      
           <div className="chart-container">
+            
             <Chart
               symbol={contextData.symbol}
               amount={contextData.value}
