@@ -68,22 +68,36 @@ export const Chart = (props: any) => {
     const period1 = props.period1;
     const period2 = props.period2;
     const symbol = props.symbol;
+    const interval = props.interval;
+    const periods =
+      props.interval == "1d"
+        ? 7
+        : props.interval == "1wk"
+        ? 4
+        : props.interval == "1mo"
+        ? 12
+        : null;
 
     const fechtData = async () => {
-      const dataSerie = await getData(symbol, period1, period2);
-
+      const dataSerie = await getData(symbol, period1, period2, interval);
       const arrayDatos = [dataSerie][0].data;
-
       const prices = arrayDatos.map((item: any) => item.close);
       const date = arrayDatos.map((item: any) => item.date.split("T")[0]);
       const dca = dcaCalculator(props.amount, prices, date);
-      const sharp = sharpeCalculator(prices, date, 12);
+      const sharp = sharpeCalculator(prices, date, periods);
 
       props.type === "dca" ? setChartData(dca) : setChartData(sharp);
     };
 
     fechtData();
-  }, [props.symbol, props.amount, props.period1, props.period2, props.type]);
+  }, [
+    props.symbol,
+    props.amount,
+    props.period1,
+    props.period2,
+    props.type,
+    props.interval,
+  ]);
   const labels = chartData.x;
   const data = {
     labels,

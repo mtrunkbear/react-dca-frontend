@@ -1,9 +1,24 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import SelectAsset from "./SelectAsset";
 import { DataContext } from "../contexts/dataContext";
 
 export const Form = (props: any) => {
   const { contextData, setContextData } = useContext(DataContext);
+
+  const [formData, setFormData] = useState({
+    symbol: contextData.symbol,
+    interval: contextData.interval,
+    value: contextData.value,
+    period1: contextData.period1,
+    period2: contextData.period2,
+  });
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    console.log(formData);
+    setContextData({ ...formData });
+    console.log(contextData);
+  };
 
   return (
     <form className="form">
@@ -13,7 +28,20 @@ export const Form = (props: any) => {
           <div className="select">
             <SelectAsset
               setAsset={(opt: any) =>
-                setContextData({ ...contextData, symbol: opt.value as any })
+                setFormData({ ...formData, symbol: opt.value as any })
+              }
+              type={"instrument"}
+            />
+          </div>
+        </label>
+      </div>
+      <div className="form-row">
+        <label>
+          <span> Intervalo:</span>
+          <div className="select">
+            <SelectAsset
+              setInterval={(opt: any) =>
+                setFormData({ ...formData, interval: opt.value as any })
               }
             />
           </div>
@@ -24,10 +52,10 @@ export const Form = (props: any) => {
           <label>
             <span> Monto:</span>
             <input
-              value={contextData.value}
-              onChange={(e) =>
-                setContextData({ ...contextData, value: e.target.value as any })
-              }
+              value={formData.value}
+              onChange={(e) => {
+                setFormData({ ...formData, value: e.target.value as any });
+              }}
             />
           </label>
         </div>
@@ -38,9 +66,9 @@ export const Form = (props: any) => {
           <span> Desde:</span>
           <input
             type="date"
-            value={contextData.period1}
+            value={formData.period1}
             onChange={(e) =>
-              setContextData({ ...contextData, period1: e.target.value })
+              setFormData({ ...formData, period1: e.target.value })
             }
           />
         </label>
@@ -50,11 +78,18 @@ export const Form = (props: any) => {
           <span> Hasta:</span>
           <input
             type="date"
-            value={contextData.period2}
+            value={formData.period2}
             onChange={(e) =>
-              setContextData({ ...contextData, period2: e.target.value })
+              setFormData({ ...formData, period2: e.target.value })
             }
           />
+        </label>
+      </div>
+      <div className="form-row">
+        <label>
+          <button className="form-button" onClick={(e) => handleSubmit(e)}>
+            Submit
+          </button>
         </label>
       </div>
     </form>

@@ -19,6 +19,7 @@ export const DataContextProvider = (props: any) => {
     value: 100,
     period1: "2010-02-01",
     period2: todayDate,
+    interval: '1mo',
   });
 
   const value = { contextData, setContextData };

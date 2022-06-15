@@ -11,8 +11,18 @@ const assets = [
   { label: "APPLE", value: "AAPL" },
 ];
 
-const SelectAsset = ({ setAsset }: any) => {
-  return <Select options={assets} onChange={setAsset} styles={colourStyles} />;
+const interval = [
+  { label: "Diario", value: "1d" },
+  { label: "Semanal", value: "1wk" },
+  { label: "Mensual", value: "1mo" },
+];
+
+const SelectAsset = ({ setAsset, setInterval, type }: any) => {
+  return type == "instrument" ? (
+    <Select options={assets} onChange={setAsset} styles={colourStyles} />
+  ) : (
+    <Select options={interval} onChange={setInterval} styles={colourStyles} />
+  );
 };
 
 export default SelectAsset;
