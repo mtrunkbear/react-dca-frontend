@@ -1,15 +1,13 @@
 import "./App.css";
 
-import { useContext } from "react";
-
-import { DataContext } from "./contexts/dataContext";
 import { Link } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DolarCostAverage from "./routes/DolarCostAverage";
 import SharpeRatio from "./routes/SharpeRatio";
 
 function App() {
-  const { contextData } = useContext(DataContext);
+
+
   const Header = () => {
     return (
       <header className="app-header">

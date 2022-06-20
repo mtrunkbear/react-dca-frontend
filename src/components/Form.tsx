@@ -15,9 +15,7 @@ export const Form = (props: any) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(formData);
     setContextData({ ...formData });
-    console.log(contextData);
   };
 
   return (

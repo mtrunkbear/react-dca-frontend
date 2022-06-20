@@ -6,8 +6,6 @@ import { DataContextProvider } from "./contexts/dataContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root') as any);
 root.render(
-  <React.StrictMode>
     <DataContextProvider> <App /></DataContextProvider>
-   
-  </React.StrictMode>
+  
 );

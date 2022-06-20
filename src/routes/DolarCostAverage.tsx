@@ -5,11 +5,15 @@ import { Chart } from "../components/Chart";
 export default function DolarCostAverage() {
     
   const { contextData } = useContext(DataContext);
+  const value = parseInt(contextData.value).toLocaleString('en-US', { 
+    style: "currency", 
+    currency: "USD"
+  })
 
     return (
         <div className="app-content">
            <div className="subtitle">
-      <p>Con un ahorro de $ {contextData.value} dolares al mes:</p>
+      <p>Con un ahorro de {value} dolares al mes:</p>
     </div>
        
 
