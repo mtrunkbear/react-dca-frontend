@@ -30,6 +30,17 @@ ChartJS.register(
 );
 
 export const Chart = (props: any) => {
+  const [chartData, setChartData] = useState<any>([{ x: NaN, y: "?" }] as any);
+
+  const valueWithDca =
+    "$" + chartData[chartData.length - 1].y.toLocaleString().split(".")[0];
+  const valueWhitoutDca = chartData[chartData.length - 1].y
+    .toString()
+    .slice(0, 5);
+  const actualValue = props.type === "dca" ? valueWithDca : valueWhitoutDca;
+
+  const [symbol, setSymbol] = useState(props.symbol);
+
   const options = {
     animation: true,
     scales: {
@@ -78,14 +89,7 @@ export const Chart = (props: any) => {
     },
   };
 
-  const [chartData, setChartData] = useState<any>([{ x: NaN, y: "?" }] as any);
-  const actualValue =
-    props.type === "dca"
-      ? "$" + chartData[chartData.length - 1].y.toLocaleString().split(".")[0]
-      : chartData[chartData.length - 1].y.toString().slice(0, 5);
-  const [symbol, setSymbol] = useState();
   useEffect(() => {
-    console.log(props);
     const period1 = props.period1;
     const period2 = props.period2;
     const symbol = props.symbol;
@@ -108,24 +112,25 @@ export const Chart = (props: any) => {
       if (props.type === "dca") {
         const dca = dcaCalculator(props.amount, prices, date);
         setChartData(dca);
-        console.log(chartData.map((item: any) => item.y));
       } else {
         const sharp = sharpeCalculator(prices, date, periods);
         setChartData(sharp);
       }
-
       setSymbol(symbol);
     };
 
     fechtData();
+
+    console.log(chartData);
   }, [props]);
+
   const labels = chartData.map((item: any) => item.x);
   const data = {
     labels,
     datasets: [
       {
         label: symbol + " " + actualValue.toString(),
-        data: chartData.map((item: any) => item.y),
+        data: chartData,
         fill: props.type === "dca" ? true : false,
         borderColor: "rgb(0, 255, 0)",
         backgroundColor: "rgba(0, 99, 0, 1)",
