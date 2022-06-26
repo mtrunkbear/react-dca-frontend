@@ -55,7 +55,7 @@ export const Chart = (props: any) => {
   const animation = chartData?.length > 1000 ? false : true;
 
   const options = {
-    maintainAspectRatio : false,
+    maintainAspectRatio: false,
     animation: animation,
     scales: {
       x: {
@@ -85,12 +85,20 @@ export const Chart = (props: any) => {
       },
 
       zoom: {
+        pan: {
+          enabled: true,
+          mode: "x",
+          modifierKey: "ctrl",
+        },
         zoom: {
           drag: {
             enabled: true,
             backgroundColor: "rgba(150,180,0,0.3)",
           },
           wheel: {
+            enabled: true,
+          },
+          pinch: {
             enabled: true,
           },
 
