@@ -6,9 +6,12 @@ export const getData = async (
   period2: any,
   interval: any
 ) => {
-  const response = await axios.get("http://localhost:4000/api/data/" + symbol, {
-    params: { period1: period1, period2: period2, interval: interval },
-  });
+  const response = await axios.get(
+    "https://dcabackend.herokuapp.com/api/data/" + symbol,
+    {
+      params: { period1: period1, period2: period2, interval: interval },
+    }
+  );
 
   return response;
 };

@@ -1,14 +1,20 @@
 import Select from "react-select";
 const assets = [
-  { label: "BTC", value: "BTC-USD" },
-  { label: "ETH", value: "ETH-USD" },
-  { label: "USDT", value: "USDT-USD" },
-  { label: "SOL", value: "SOL-USD" },
-  { label: "TSLA", value: "TSLA" },
+  { label: "Bitcoin (BTC)", value: "BTC-USD" },
+  { label: "Ethereum (ETH)", value: "ETH-USD" },
+  { label: "Tether (USDT)", value: "USDT-USD" },
+  { label: "USD Coin (USDC)", value: "USDC-USD" },
+  { label: "Solana (SOL)", value: "SOL-USD" },
+  { label: "Cardano (ADA)", value: "ADA-USD" },
+  { label: "Binance Coin", value: "BNB-USD" },
+  { label: "Polkadot (DOT)", value: "DOT-USD" },
   { label: "META", value: "FB" },
-  { label: "DOT", value: "DOT-USD" },
+  { label: "Tesla (TSLA)", value: "TSLA" },
   { label: "S&P 500", value: "^GSPC" },
-  { label: "APPLE", value: "AAPL" },
+  { label: "Apple (AAPL)", value: "AAPL" },
+  { label: "Advanced MicroDevices (AMD)", value: "AMD" },
+  { label: "Amazon (AMZN)", value: "AMZN" },
+  { label: "Nvidia (NVDA)", value: "NVDA" },
 ];
 
 const interval = [
@@ -18,7 +24,7 @@ const interval = [
 ];
 
 const SelectAsset = ({ setAsset, setInterval, type }: any) => {
-  return type == "instrument" ? (
+  return type === "instrument" ? (
     <Select options={assets} onChange={setAsset} styles={colourStyles} />
   ) : (
     <Select options={interval} onChange={setInterval} styles={colourStyles} />
@@ -32,7 +38,8 @@ const colourStyles = {
     ...styles,
     backgroundColor: "white",
     color: "rgb(0, 30, 0)",
-    height: "30px",
+    minHeight: "10px",
+    maxHeight: "36px",
     width: "103%",
     fontSize: "20px",
   }),

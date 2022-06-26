@@ -1,17 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import SelectAsset from "./SelectAsset";
 import { DataContext } from "../contexts/dataContext";
 
 export const Form = (props: any) => {
   const { contextData, setContextData } = useContext(DataContext);
 
-
-
   return (
     <form className="form">
       <div className="form-row">
         <label>
-          <span> Instrumento:</span>
+          <span> Instrument:</span>
           <div className="select">
             <SelectAsset
               setAsset={(opt: any) =>
@@ -24,7 +22,7 @@ export const Form = (props: any) => {
       </div>
       <div className="form-row">
         <label>
-          <span> Intervalo:</span>
+          <span> Interval:</span>
           <div className="select">
             <SelectAsset
               setInterval={(opt: any) =>
@@ -37,11 +35,14 @@ export const Form = (props: any) => {
       {props.type === "dca" ? (
         <div className="form-row">
           <label>
-            <span> Monto:</span>
+            <span> Amount:</span>
             <input
               value={contextData.value}
               onChange={(e) => {
-                setContextData({ ...contextData, value: e.target.value as any });
+                setContextData({
+                  ...contextData,
+                  value: e.target.value as any,
+                });
               }}
             />
           </label>
@@ -50,9 +51,11 @@ export const Form = (props: any) => {
 
       <div className="form-row">
         <label>
-          <span> Desde:</span>
+          <span> From:</span>
           <input
             type="date"
+            min="1970-01-01"
+            max="2025-01-01"
             value={contextData.period1}
             onChange={(e) =>
               setContextData({ ...contextData, period1: e.target.value })
@@ -62,9 +65,11 @@ export const Form = (props: any) => {
       </div>
       <div className="form-row">
         <label>
-          <span> Hasta:</span>
+          <span> To:</span>
           <input
             type="date"
+            min="1970-01-01"
+            max="2025-01-01"
             value={contextData.period2}
             onChange={(e) =>
               setContextData({ ...contextData, period2: e.target.value })
@@ -72,7 +77,6 @@ export const Form = (props: any) => {
           />
         </label>
       </div>
-    
     </form>
   );
 };

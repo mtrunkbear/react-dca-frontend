@@ -14,8 +14,8 @@ import zoomPlugin from "chartjs-plugin-zoom";
 
 import { getData } from "../api/getData";
 import { useState, useEffect } from "react";
-import { dcaCalculator } from "../dcafunctions/dcaCalculator";
-import { sharpeCalculator } from "../dcafunctions/sharpeCalculator";
+import * as Finance from "../functions/finance";
+import { formatReturnData } from "../functions/dataManipulation";
 
 ChartJS.register(
   CategoryScale,
@@ -32,17 +32,31 @@ ChartJS.register(
 export const Chart = (props: any) => {
   const [chartData, setChartData] = useState<any>([{ x: NaN, y: "?" }] as any);
 
-  const valueWithDca =
-    "$" + chartData[chartData.length - 1].y.toLocaleString().split(".")[0];
-  const valueWhitoutDca = chartData[chartData.length - 1].y
-    .toString()
-    .slice(0, 5);
-  const actualValue = props.type === "dca" ? valueWithDca : valueWhitoutDca;
-
   const [symbol, setSymbol] = useState(props.symbol);
 
+  const valuePeriod2 = chartData[chartData.length - 1].y;
+  const valueWithPrice = "$" + valuePeriod2.toLocaleString().split(".")[0];
+
+  const valueWhitoutPrice = valuePeriod2.toString().slice(0, 5);
+
+  const actualValue =
+    props.type === "dca" || props.type === "prices"
+      ? valueWithPrice
+      : valueWhitoutPrice;
+  const titleText =
+    props.type === "dca"
+      ? "Accumulated value of the instrument (in dollars):"
+      : props.type === "sharpe"
+      ? "Instrument Sharpe Ratio:"
+      : props.type === "prices"
+      ? "Instrument Price Chart:"
+      : "Instrument Returns by Period:";
+
+  const animation = chartData?.length > 1000 ? false : true;
+
   const options = {
-    animation: true,
+    maintainAspectRatio : false,
+    animation: animation,
     scales: {
       x: {
         ticks: {
@@ -67,10 +81,7 @@ export const Chart = (props: any) => {
       },
       title: {
         display: true,
-        text:
-          props.type === "dca"
-            ? "Valor acumulado en Dolares del instrumento"
-            : "Ratio de Sharp Del Instrumento",
+        text: titleText,
       },
 
       zoom: {
@@ -110,18 +121,26 @@ export const Chart = (props: any) => {
       const date = arrayDatos.map((item: any) => item.date.split("T")[0]);
 
       if (props.type === "dca") {
-        const dca = dcaCalculator(props.amount, prices, date);
+        const dca = Finance.dolarCostAverage(props.amount, prices, date);
         setChartData(dca);
-      } else {
-        const sharp = sharpeCalculator(prices, date, periods);
+      } else if (props.type === "sharpe") {
+        const sharp = Finance.sharpeRollingRatio(prices, date, periods);
         setChartData(sharp);
+      } else if (props.type === "priceReturns") {
+        const priceReturns = Finance.priceReturns({
+          date: date,
+          prices: prices,
+        });
+        setChartData(priceReturns);
+      } else {
+        const pricesFormated = formatReturnData({ x: date, y: prices });
+        setChartData(pricesFormated);
       }
+
       setSymbol(symbol);
     };
 
     fechtData();
-
-    console.log(chartData);
   }, [props]);
 
   const labels = chartData.map((item: any) => item.x);
