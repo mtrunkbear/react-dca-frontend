@@ -4,20 +4,28 @@ import * as Statistics from "./statistics";
 export const priceReturns = ({
   date,
   prices,
+  mode,
 }: {
   date?: any[];
   prices: any[];
+  mode?: string;
 }) => {
   let returns = [];
 
   for (let i = 0; i < prices.length; i++) {
     returns[i] = (prices[i] - prices[i - 1]) / prices[i - 1];
   }
+  let modeReturns = [];
+  if (mode === "percent") {
+    modeReturns = Statistics.toPercent(returns);
+  } else {
+    modeReturns = returns;
+  }
 
   if (date) {
-    return formatReturnData({ x: date, y: returns });
+    return formatReturnData({ x: date, y: modeReturns });
   } else {
-    return returns;
+    return modeReturns;
   }
 };
 

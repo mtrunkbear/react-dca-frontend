@@ -35,14 +35,18 @@ export const Chart = (props: any) => {
   const [symbol, setSymbol] = useState(props.symbol);
 
   const valuePeriod2 = chartData[chartData.length - 1].y;
-  const valueWithPrice = "$" + valuePeriod2.toLocaleString().split(".")[0];
+  const valueWithPrice =  valuePeriod2.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
 
   const valueWhitoutPrice = valuePeriod2.toString().slice(0, 5);
+  const valueWhithReturns= valueWhitoutPrice +'%';
 
   const actualValue =
     props.type === "dca" || props.type === "prices"
       ? valueWithPrice
-      : valueWhitoutPrice;
+      : props.type ==='priceReturns'? valueWhithReturns :valueWhitoutPrice;
   const titleText =
     props.type === "dca"
       ? "Accumulated value of the instrument (in dollars):"
@@ -144,6 +148,7 @@ export const Chart = (props: any) => {
         const priceReturns = Finance.priceReturns({
           date: date,
           prices: prices,
+          mode : 'percent',
         });
         setChartData(priceReturns);
       } else {

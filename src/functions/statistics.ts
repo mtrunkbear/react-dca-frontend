@@ -4,6 +4,13 @@ export const mean = (array: any) => {
 
   return mean;
 };
+export const toPercent = (array: any) => {
+  let data = [];
+  for (let i = 0; i < array.length; i++) {
+    data[i] = array[i] * 100;
+  }
+  return data;
+};
 
 export const variance = (array: any) => {
   let variance = [];
