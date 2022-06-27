@@ -55,6 +55,7 @@ export const Chart = (props: any) => {
   const animation = chartData?.length > 1000 ? false : true;
 
   const options = {
+    interaction: { mode: "nearest", intersect: false },
     maintainAspectRatio: false,
     animation: animation,
     scales: {
@@ -79,9 +80,14 @@ export const Chart = (props: any) => {
           font: { size: 15 },
         },
       },
+
       title: {
         display: true,
         text: titleText,
+        padding: {
+          top: 20,
+          bottom: 5,
+        },
       },
 
       zoom: {
