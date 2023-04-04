@@ -56,7 +56,7 @@ export const Chart = (props: any) => {
       ? "Instrument Price Chart:"
       : "Instrument Returns by Period:";
 
-  const animation = chartData?.length > 1000 ? false : true;
+  const animation = !chartData?.length > 1000;
 
   const options = {
     interaction: { mode: "nearest", intersect: false },
