@@ -63,6 +63,5 @@ export const sharpeRollingRatio = (prices: any, date: any, periods: any) => {
   for (let i = 0; i < returns.length; i++) {
     data[i] = { x: date[i], y: averageReturns[i - 2] / averageStdev[i - 2] };
   }
-  console.log(averageReturns.slice(2, averageReturns.length + 2));
   return data;
 };
